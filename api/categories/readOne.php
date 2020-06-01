@@ -16,10 +16,19 @@ header("Content-Type: application/json; charset=UTF-8");
 include_once '../../config/Database.php';
 include_once '../../classes/Category.php';
 
+//if (isset($_GET['id'])) {
+//    $id = $_GET['id'];
+// http://ggg-cc-portfolio.test/api/categories/readOne.php?id=1
+// another approach is to send the id in a json object
+
+$data = json_decode(file_get_contents("php://input"), false);
+
 // get passed parameter value, in this case, the record ID
 // isset() is a PHP function used to verify if a value is there or not
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
+
+
+if (isset($data->id)) {
+    $id = $data->id;
 
     // instantiate database and get database connection
     $database = new Database();

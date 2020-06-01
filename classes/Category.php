@@ -102,4 +102,41 @@ class Category
         return $stmt;
     }
 
+    public function update() {
+
+        // query to insert record
+        $query = "UPDATE {$this->tableName}
+            SET
+                code = :catCode,
+                name = :catName,
+                description = :catDescription,
+                updated_at = now()
+            WHERE id = :catId;        
+        ";
+
+        // prepare statement
+        $stmt = $this->conn->prepare($query);
+
+        // Sanitize
+        $this->id = Utils::sanitize($this->id);
+        $this->code = Utils::sanitize($this->code);
+        $this->name = Utils::sanitize($this->name);
+        $this->description = Utils::sanitize($this->description);
+        $this->icon = Utils::sanitize($this->icon);
+
+        // bind data
+        $stmt->bindParam(":catId", $this->id, PDO::PARAM_INT);
+        $stmt->bindParam(":catCode", $this->code, PDO::PARAM_STR);
+        $stmt->bindParam(":catName", $this->name, PDO::PARAM_STR);
+        $stmt->bindParam(":catDescription", $this->description, PDO::PARAM_STR);
+
+        // execute
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
 }
