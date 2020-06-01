@@ -15,7 +15,7 @@ header("Content-Type: application/json; charset=UTF-8");
 // database connection will be here
 // include database and object files
 include_once '../../config/Database.php';
-include_once '../../classes/categories/Category.php';
+include_once '../../classes/Category.php';
 
 // instantiate database and product object
 $database = new Database();
