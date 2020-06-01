@@ -90,4 +90,16 @@ class Category
         return false;
     }
 
+    public function readOne($id) {
+        // Select by id query
+        $query = "SELECT * FROM {$this->tableName} WHERE id = :catId ORDER BY created_at DESC";
+
+        // prepare, bind and execute
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':catId', $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt;
+    }
+
 }
