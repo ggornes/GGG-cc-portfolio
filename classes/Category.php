@@ -167,7 +167,7 @@ class Category
             ORDER BY c.created_at DESC;";
 
         $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(':searchCode', $searchName, PDO::PARAM_STR);
+        $stmt->bindParam(':searchCode', $searchCode, PDO::PARAM_STR);
         $stmt->bindParam(':searchDescription', $searchDescription, PDO::PARAM_STR);
         $stmt->execute();
 
