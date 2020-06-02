@@ -139,4 +139,19 @@ class Category
 
     }
 
+    public function delete($id) {
+        // select ONE query
+        $query = "
+            DELETE FROM {$this->tableName}
+            WHERE id = :catID
+            ";
+
+        // prepare, bind named parameter, and execute query
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':catID', $id, PDO::PARAM_STR);
+        $stmt->execute();
+
+        return $stmt;
+    }
+
 }
