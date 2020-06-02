@@ -154,4 +154,25 @@ class Category
         return $stmt;
     }
 
+
+    public function search(string $searchText) {
+
+        $searchDescription = $searchCode = '%'.Utils::sanitize($searchText).'%';
+
+        $query = "
+            SELECT *
+            FROM {$this->tableName} AS c
+            WHERE c.description LIKE :searchDescription
+            OR c.code LIKE :searchCode
+            ORDER BY c.created_at DESC;";
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':searchCode', $searchName, PDO::PARAM_STR);
+        $stmt->bindParam(':searchDescription', $searchDescription, PDO::PARAM_STR);
+        $stmt->execute();
+
+        return $stmt;
+
+    }
+
 }
