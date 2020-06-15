@@ -82,9 +82,7 @@ include '../../classes/Utils.php';
     <?php
     $messages = [];
     if(isset($_GET['id'])) {
-        $id = isset($_GET['id'])
-            ?
-            $_GET['id'] : die('ERROR: Record ID not found.');
+        $id = isset($_GET['id']) ? $_GET['id'] : die('ERROR: Record ID not found.');
     }
 
     // read current record data
