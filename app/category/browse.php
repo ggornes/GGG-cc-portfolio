@@ -125,7 +125,7 @@
                     Edit
                 </a>
 
-                <a href="#"
+                <a href="../category/delete.php?id=<?= $row->id ?>"
                    class="btn btn-danger">
                     Delete
                 </a>

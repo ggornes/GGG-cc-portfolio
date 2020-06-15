@@ -54,7 +54,6 @@ $allowedFileTypes = array(
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="../product/browse.php">Browse</a>
-                    <a class="dropdown-item" href="../product/browse-v2.php">Browse v2</a>
                     <a class="dropdown-item" href="../product/create.php">Add</a>
                 </div>
             </li>
