@@ -115,12 +115,12 @@
             <td><?= $row->name ?></td>
             <td><?= $row->description ?></td>
             <td>
-                <a href="../product/read.php?id=<?=$row->id ?>"
+                <a href="../category/read.php?id=<?=$row->id ?>"
                    class="btn btn-info mr-1">
                     Read
                 </a>
 
-                <a href="../product/update.php?id=<?=$row->id ?>"
+                <a href="../category/update.php?id=<?=$row->id ?>"
                    class="btn btn-info mr-1">
                     Edit
                 </a>
