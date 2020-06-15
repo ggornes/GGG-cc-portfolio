@@ -1,7 +1,7 @@
 <?php
 /*******************************************************
  * Project:     ggg-cc-portfolio
- * File:        navbar.php
+ * File:        nav.php
  * Author:      Gerardo
  * Date:        2020-06-01
  * Version:     1.0.0
@@ -38,14 +38,14 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="../categories" id="navbarDropdown"
+                <a class="nav-link dropdown-toggle" href="../category" id="navbarDropdown"
                    role="button" data-toggle="dropdown" aria-haspopup="true"
                    aria-expanded="false">
                     Category
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/app/categories/create.php">Add</a>
-                    <a class="dropdown-item" href="/app/categories/browse.php">Browse</a>
+                    <a class="dropdown-item" href="/app/category/create.php">Add</a>
+                    <a class="dropdown-item" href="/app/category/browse.php">Browse</a>
                 </div>
             </li>
     </div>

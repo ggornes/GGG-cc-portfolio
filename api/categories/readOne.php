@@ -37,7 +37,7 @@ if (isset($data->id)) {
     // initialize category object
     $category = new Category($db);
 
-    // query categories with the given ID
+    // query category with the given ID
     $stmt = $category->readOne($id);
     $num = $stmt->rowCount();
 
@@ -63,7 +63,7 @@ if (isset($data->id)) {
         // set response code 200 ok
         http_response_code(200);
 
-        // send categories to JSON response
+        // send category to JSON response
         echo json_encode($categoryList);
     }
 

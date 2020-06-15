@@ -18,7 +18,7 @@ class Category
     /** @var */
     private $conn;
     /** @var string */
-    private $tableName = "categories";
+    private $tableName = "category";
 
     /**
      * Category object properties
@@ -36,7 +36,7 @@ class Category
     /**
      * Category constructor
      * Take a database connection as a parameter
-     * Use: `$categories = new Category($db)`
+     * Use: `$category = new Category($db)`
      */
     public function __construct($db)
     {

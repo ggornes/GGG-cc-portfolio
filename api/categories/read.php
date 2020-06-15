@@ -24,8 +24,8 @@ $db = $database->getConnection();
 // initialize object
 $category = new Category($db);
 
-// read categories
-// query categories
+// read category
+// query category
 $stmt = $category->read();
 
 // number of records
@@ -34,8 +34,8 @@ $num = $stmt->rowCount();
 // if records found
 if ($num>0) {
 
-    // store categories records in an array
-    $categories_arr["categories"]=[];
+    // store category records in an array
+    $categories_arr["category"]=[];
 
     // retrieve our table contents
     // fetch() is faster than fetchAll()
@@ -58,7 +58,7 @@ if ($num>0) {
     // set response code - 200 OK
     http_response_code(200);
 
-    // show products data in json format
+    // show product data in json format
     echo json_encode($categories_arr);
 }
 
@@ -66,9 +66,9 @@ else {
     // set response code - 404 Not found
     http_response_code(404);
 
-    // tell the user no products found
+    // tell the user no product found
     echo json_encode(
-        array("message" => "No products found.")
+        array("message" => "No product found.")
     );
 
 }
