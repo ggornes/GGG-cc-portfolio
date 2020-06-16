@@ -89,11 +89,42 @@
     $stmt->execute();
 
     // number of rows returned
-    $num = $stmt->rowCount();
+    $totalRecords = $stmt->rowCount();
+    //$num = $totalRecords;
 
     // set the page records to 5
     $pageRecords = 5;
-    $displayPages = (int)($num/$pageRecords);
+    $displayPages = (int)ceil($totalRecords/$pageRecords);
+
+    $activePage = 1;
+
+    // If user request a page number greater than $displayPages, set $activePage to the maximum pages number
+    if (isset($_GET['page']) && is_numeric($_GET['page']) && (int)$_GET['page'] >0 ){
+        if ((int)$_GET['page'] > $displayPages){
+            $activePage = $displayPages;
+        } else {$activePage = (int)$_GET['page']; }
+    }
+
+    // exclude records depending on which page the user is
+    $skipRecords = ($activePage - 1) * $pageRecords;
+
+
+    if ($pageRecords > 0 && $skipRecords >= 0) {
+
+        $query2 = "SELECT id, code, name, description FROM categories ORDER BY id DESC LIMIT :skipRecords, :pageRecords";
+
+        $stmt2 = $conn->prepare($query2);
+        $stmt2->bindParam(':skipRecords', $skipRecords, PDO::PARAM_INT);
+        $stmt2->bindParam(':pageRecords', $pageRecords, PDO::PARAM_INT);
+    } else{
+        $query2 = "SELECT id, code, name, description FROM categories ORDER BY id DESC";
+        $stmt2 = $conn->prepare($query2);
+    }
+
+    $stmt2->execute();
+
+    $num = $stmt2->rowCount();
+
 
     // check if more than 0 records found
     if ($num >0) {
@@ -110,7 +141,7 @@
         </thead>
         <tbody>
         <?php
-        while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+        while ($row = $stmt2->fetch(PDO::FETCH_OBJ)) {
             // create new table row per record
         ?>
         <tr>
@@ -159,11 +190,20 @@
     <div class="row">
         <nav aria-label="Page navigation example">
             <ul class="pagination">
-                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                <li class="page-item <?= $activePage <= 1 ? 'disabled' : '' ?>"><a class="page-link" href="<?= "browse.php?page=".($activePage - 1 < 1 ? $activePage : $activePage - 1) ?>">Previous</a></li>
+
+                <?php
+                for($i = 0; $i < $displayPages; $i++){?>
+                    <li class="<?= ($activePage === $i+1) ? "page-item active" : "page-item" ?>">
+                        <a class="page-link" href="<?= "browse.php?page=".($i+1)?>"><?= $i+1 ?></a>
+                    </li>
+                <?php
+                }
+                ?>
+
+                <li class="page-item <?= $activePage >= $displayPages ? 'disabled' : ''?>">
+                    <a class="page-link" href="<?= "browse.php?page=".($displayPages) ?>">Next</a>
+                </li>
             </ul>
         </nav>
     </div>
